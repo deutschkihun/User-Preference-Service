@@ -18,8 +18,6 @@ class SignUpForm extends StatefulWidget {
 
 class _SignUpFormState extends State<SignUpForm> {
   final _formKey = GlobalKey<FormState>();
-
-  //final gender = ['male', 'female'];
   String gender;
   String paymentMethod;
   String subscription;
@@ -32,11 +30,7 @@ class _SignUpFormState extends State<SignUpForm> {
     'Applepay'
   ];
   List<String> genderList = ['male', 'female'];
-  List<String> subscriptionList = [
-    'BahnCard',
-    'Netbike Monatstarif',
-    'Stadtmobil'
-  ];
+  List<String> subscriptionList = ['BahnCard', 'Nextbike', 'Stadtmobil'];
   List<String> handicappedList = ['Yes', 'No'];
 
   String url = "http://localhost:8080/register";
@@ -88,7 +82,13 @@ class _SignUpFormState extends State<SignUpForm> {
           SizedBox(height: getProportionateScreenHeight(30)),
           buildConfirmPassFormField(),
           FormError(errors: errors),
-          SizedBox(height: getProportionateScreenHeight(80)),
+          SizedBox(height: getProportionateScreenHeight(30)),
+          Text("Static user profile", style: headingStyle),
+          Text(
+            "finish your static user profile",
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: SizeConfig.screenHeight * 0.04),
           buildAgeFormField(),
           SizedBox(height: getProportionateScreenHeight(30)),
           buildGenderFormField(),
@@ -241,7 +241,7 @@ class _SignUpFormState extends State<SignUpForm> {
       ),
       value: gender,
       hint: Text(
-        'Select your gender',
+        'Select gender',
       ),
       isExpanded: true,
       onChanged: (value) {
@@ -275,7 +275,7 @@ class _SignUpFormState extends State<SignUpForm> {
       ),
       value: subscription,
       hint: Text(
-        'choose subscription',
+        'Select subscription',
       ),
       isExpanded: true,
       onChanged: (value) {
@@ -308,7 +308,7 @@ class _SignUpFormState extends State<SignUpForm> {
       ),
       value: paymentMethod,
       hint: Text(
-        'choose payment method',
+        'Select payment method',
       ),
       isExpanded: true,
       onChanged: (value) {
@@ -341,7 +341,7 @@ class _SignUpFormState extends State<SignUpForm> {
       ),
       value: handicapped,
       hint: Text(
-        'Need support ?',
+        'Need any rsupport?',
       ),
       isExpanded: true,
       onChanged: (value) {
