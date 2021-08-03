@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:upp/components/custom_surfix_icon.dart';
 import 'package:upp/components/default_button.dart';
 import 'package:upp/components/form_error.dart';
 import 'package:upp/helper/keyboard.dart';
@@ -28,6 +27,7 @@ class _HomeFormState extends State<HomeForm> {
   String sharingTransportation;
   int travelCost;
   int travelTime;
+  int waitingTime;
   int transfer;
   int roadInclination;
 
@@ -41,19 +41,34 @@ class _HomeFormState extends State<HomeForm> {
     'Tram',
     'Taxi',
     'Sharing transportation',
-    'Private Transportation'
+    'Private Transportation',
+    'Not preferred'
   ];
-  List<String> roadSurfaceList = ['dirt', 'alspaht'];
+  List<String> roadSurfaceList = [
+    'Paved surface',
+    'Rough surface',
+    'Riding surface',
+    'Concrete',
+    'Asphalte',
+    'Grass',
+    'Wood'
+  ];
+
   List<String> privateTransporationList = [
-    'Private vehicles',
-    'Bike',
+    'Automobile',
+    'Bicycle',
+    'Electric scooter',
+    'Motorcycle',
+    'Skateboard',
+    'Not preferred'
   ];
   List<String> sharingTransportationList = [
     'Stadtmobil',
     'NextBike',
-    'E-scooter (Tier)',
-    'E-scooter (Bird)',
-    'E-scooter (VOI)',
+    'Electric-scooter (Tier)',
+    'Electric-scooter (Bird)',
+    'Electric-scooter (VOI)',
+    'Not preferred'
   ];
 
   void addError({String error}) {
@@ -75,7 +90,18 @@ class _HomeFormState extends State<HomeForm> {
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
           'Environmental friendliness': environmentalFriendliness,
-          'Travel const': travelCost,
+          'Light rail travel': lightRailTravel,
+          'Travel cost': travelCost,
+          'Travel time': travelTime,
+          'Transfer': transfer,
+          'Private Transportation': privateTransportation,
+          'Waiting time': waitingTime,
+          'Favorite place': favoritePlace,
+          'Living street': livingStreet,
+          'Preferred transportation': privateTransportation,
+          'Road inclination': roadInclination,
+          'Road surface': roadSurface,
+          'Sharing Transportation': sharingTransportation
         }));
     print(res.body);
     if (res.body != null) {
@@ -120,7 +146,7 @@ class _HomeFormState extends State<HomeForm> {
           //FormError(errors: errors),
           SizedBox(height: getProportionateScreenHeight(30)),
           DefaultButton(
-            text: "Continue",
+            text: "Save",
             press: () {
               if (_formKey.currentState.validate()) {
                 // _formKey.currentState.save();
@@ -140,11 +166,10 @@ class _HomeFormState extends State<HomeForm> {
       decoration: InputDecoration(
         labelText: "Environmental friendliness",
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/User.svg"),
       ),
       value: environmentalFriendliness,
       hint: Text(
-        'Do you prefer ?',
+        'Do you prefer?',
       ),
       isExpanded: true,
       onChanged: (value) {
@@ -173,11 +198,10 @@ class _HomeFormState extends State<HomeForm> {
       decoration: InputDecoration(
         labelText: "Light rail travel",
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/User.svg"),
       ),
       value: lightRailTravel,
       hint: Text(
-        'Do you prefer ?',
+        'Do you prefer?',
       ),
       isExpanded: true,
       onChanged: (value) {
@@ -206,8 +230,8 @@ class _HomeFormState extends State<HomeForm> {
       keyboardType: TextInputType.number,
       onSaved: (newValue) => travelCost = newValue as int,
       decoration: InputDecoration(
-        labelText: "Travel cost in Dollar",
-        hintText: "your max travel cost (Dollar)",
+        labelText: "Travel cost",
+        hintText: "Max. travel cost",
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixText: '\$',
       ),
@@ -219,10 +243,10 @@ class _HomeFormState extends State<HomeForm> {
       keyboardType: TextInputType.number,
       onSaved: (newValue) => travelCost = newValue as int,
       decoration: InputDecoration(
-        labelText: "Travel time in minuten",
-        hintText: "your max travel time (min)",
+        labelText: "Travel time",
+        hintText: "Max. travel time",
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixText: 'min',
+        suffixText: 'minute(s)',
       ),
     );
   }
@@ -232,8 +256,8 @@ class _HomeFormState extends State<HomeForm> {
       keyboardType: TextInputType.number,
       onSaved: (newValue) => travelCost = newValue as int,
       decoration: InputDecoration(
-        labelText: "Transfer in times",
-        hintText: "your max transfer (times)",
+        labelText: "Transfer",
+        hintText: "Max. number of transfers",
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixText: 'time(s)',
       ),
@@ -245,11 +269,10 @@ class _HomeFormState extends State<HomeForm> {
       decoration: InputDecoration(
         labelText: "Private Transportation",
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/User.svg"),
       ),
       value: privateTransportation,
       hint: Text(
-        'select your preference',
+        'Select preference',
       ),
       isExpanded: true,
       onChanged: (value) {
@@ -276,12 +299,12 @@ class _HomeFormState extends State<HomeForm> {
   TextFormField buildWaitingTimeFormField() {
     return TextFormField(
       keyboardType: TextInputType.number,
-      onSaved: (newValue) => travelCost = newValue as int,
+      onSaved: (newValue) => waitingTime = newValue as int,
       decoration: InputDecoration(
-        labelText: "Waiting time in minuten",
-        hintText: "your max waiting time (min)",
+        labelText: "Waiting time",
+        hintText: "Max. waiting time",
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixText: 'min',
+        suffixText: 'minute(s)',
       ),
     );
   }
@@ -289,12 +312,12 @@ class _HomeFormState extends State<HomeForm> {
   DropdownButtonFormField buildFavoritePlaceFormField() {
     return DropdownButtonFormField(
       decoration: InputDecoration(
-        labelText: "Saving favorite place feature",
+        labelText: "Saving favorite place function",
         floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
       value: favoritePlace,
       hint: Text(
-        'Do you prefer ?',
+        'Do you prefer?',
       ),
       isExpanded: true,
       onChanged: (value) {
@@ -326,7 +349,7 @@ class _HomeFormState extends State<HomeForm> {
       ),
       value: livingStreet,
       hint: Text(
-        'Do you prefer ?',
+        'Do you prefer?',
       ),
       isExpanded: true,
       onChanged: (value) {
@@ -358,7 +381,7 @@ class _HomeFormState extends State<HomeForm> {
       ),
       value: preferredTransportation,
       hint: Text(
-        'select your preference',
+        'Select preference',
       ),
       isExpanded: true,
       onChanged: (value) {
@@ -388,9 +411,9 @@ class _HomeFormState extends State<HomeForm> {
       onSaved: (newValue) => roadInclination = newValue as int,
       decoration: InputDecoration(
         labelText: "Road inclination",
-        hintText: "your max road inclination (°)",
+        hintText: "Max. road inclination",
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixText: '°',
+        suffixText: '°(degree)',
       ),
     );
   }
@@ -403,7 +426,7 @@ class _HomeFormState extends State<HomeForm> {
       ),
       value: roadSurface,
       hint: Text(
-        'select your preference',
+        'Select preference',
       ),
       isExpanded: true,
       onChanged: (value) {
@@ -435,7 +458,7 @@ class _HomeFormState extends State<HomeForm> {
       ),
       value: sharingTransportation,
       hint: Text(
-        'select your preference',
+        'Select preference',
       ),
       isExpanded: true,
       onChanged: (value) {

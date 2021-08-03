@@ -19,8 +19,9 @@ class SignUpForm extends StatefulWidget {
 class _SignUpFormState extends State<SignUpForm> {
   final _formKey = GlobalKey<FormState>();
 
-  String paymentMethod;
+  //final gender = ['male', 'female'];
   String gender;
+  String paymentMethod;
   String subscription;
   String handicapped;
   String confirmPassword;
@@ -104,6 +105,8 @@ class _SignUpFormState extends State<SignUpForm> {
               if (_formKey.currentState.validate()) {
                 // _formKey.currentState.save();
                 //save();
+                //debugPrint('movieTitle: $user.email');
+                print(user.email); // working
                 KeyboardUtil.hideKeyboard(context);
                 Navigator.pushNamed(context, SignInScreen.routeName);
               }
@@ -179,13 +182,15 @@ class _SignUpFormState extends State<SignUpForm> {
   TextFormField buildEmailFormField() {
     return TextFormField(
       keyboardType: TextInputType.emailAddress,
-      onSaved: (newValue) => user.email = newValue,
+      controller: TextEditingController(text: user.email),
+      //onSaved: (newValue) => user.email = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
           removeError(error: kEmailNullError);
         } else if (emailValidatorRegExp.hasMatch(value)) {
           removeError(error: kInvalidEmailError);
         }
+        user.email = value;
         return null;
       },
       validator: (value) {
@@ -211,6 +216,13 @@ class _SignUpFormState extends State<SignUpForm> {
     return TextFormField(
       keyboardType: TextInputType.number,
       onSaved: (newValue) => user.age = newValue as int,
+      /*validator: (newValue) {
+        if (newValue.isEmpty) {
+          return "can't empty";
+        } else {
+          return null;
+        }
+      },*/
       decoration: InputDecoration(
         labelText: "Age",
         hintText: "Enter your age",
@@ -221,7 +233,7 @@ class _SignUpFormState extends State<SignUpForm> {
   }
 
   DropdownButtonFormField buildGenderFormField() {
-    return DropdownButtonFormField(
+    return DropdownButtonFormField<String>(
       decoration: InputDecoration(
         labelText: "Gender",
         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -229,7 +241,7 @@ class _SignUpFormState extends State<SignUpForm> {
       ),
       value: gender,
       hint: Text(
-        'choose gender',
+        'Select your gender',
       ),
       isExpanded: true,
       onChanged: (value) {
