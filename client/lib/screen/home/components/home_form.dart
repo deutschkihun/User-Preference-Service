@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:upp/components/default_button.dart';
-import 'package:upp/components/form_error.dart';
 import 'package:upp/helper/keyboard.dart';
 import 'package:upp/screen/SignIn/signinScreen.dart';
 import 'package:http/http.dart' as http;
@@ -17,24 +16,25 @@ class _HomeFormState extends State<HomeForm> {
   final _formKey = GlobalKey<FormState>();
   final List<String> errors = [];
   String url = "http://localhost:8080/dynamic_preference_profile";
-  String environmentalFriendliness;
-  String lightRailTravel;
-  String privateTransportation;
-  String livingStreet;
-  String favoritePlace;
-  String preferredTransportation;
-  String roadSurface;
-  String sharingTransportation;
-  int travelCost;
-  int travelTime;
-  int waitingTime;
-  int transfer;
-  int roadInclination;
-
+  String environmentalFriendliness,
+      lightRailTravel,
+      privateTransportation,
+      livingStreet,
+      favoritePlace,
+      preferredTransportation,
+      roadSurface,
+      sharingTransportation,
+      weather,
+      currentLocation,
+      trafficCondtion;
+  int travelCost, travelTime, waitingTime, transfer, roadInclination;
   List<String> environmentalFriendlinessList = ['Yes', 'No'];
   List<String> lightRailTravelList = ['Yes', 'No'];
   List<String> favoritePlaceList = ['Yes', 'No'];
   List<String> livingStreetList = ['Yes', 'No'];
+  List<String> currentLoactionList = ['Yes', 'No'];
+  List<String> trafficCondtionList = ['Yes', 'No'];
+
   List<String> preferredTransportationList = [
     'Bus',
     'Train',
@@ -42,8 +42,9 @@ class _HomeFormState extends State<HomeForm> {
     'Taxi',
     'Sharing transportation',
     'Private Transportation',
-    'Not preferred'
+    'Nothing'
   ];
+  List<String> weatherList = ['Sunny', 'Rainy', 'Cloudy', 'Snowy', 'Windy'];
   List<String> roadSurfaceList = [
     'Paved surface',
     'Rough surface',
@@ -70,20 +71,6 @@ class _HomeFormState extends State<HomeForm> {
     'Electric-scooter (VOI)',
     'Not preferred'
   ];
-
-  void addError({String error}) {
-    if (!errors.contains(error))
-      setState(() {
-        errors.add(error);
-      });
-  }
-
-  void removeError({String error}) {
-    if (errors.contains(error))
-      setState(() {
-        errors.remove(error);
-      });
-  }
 
   Future save() async {
     var res = await http.post(url,
@@ -117,7 +104,6 @@ class _HomeFormState extends State<HomeForm> {
         children: [
           buildEnviromentalFriendlinessFormField(),
           SizedBox(height: getProportionateScreenHeight(30)),
-          //buildWeightFormField(),
           buildLightRailTravelFormField(),
           SizedBox(height: getProportionateScreenHeight(30)),
           buildTravelCostFormField(),
@@ -142,8 +128,13 @@ class _HomeFormState extends State<HomeForm> {
           SizedBox(height: getProportionateScreenHeight(30)),
           buildSharingTransportationFormField(),
           SizedBox(height: getProportionateScreenHeight(30)),
-          //situational context ???
-          //FormError(errors: errors),
+          buildCapacityFormField(),
+          SizedBox(height: getProportionateScreenHeight(30)),
+          buildWeatherFormField(),
+          SizedBox(height: getProportionateScreenHeight(30)),
+          buildCurrentLocationFormField(),
+          SizedBox(height: getProportionateScreenHeight(30)),
+          buildTrafficConditionFormField(),
           SizedBox(height: getProportionateScreenHeight(30)),
           DefaultButton(
             text: "Save",
@@ -177,11 +168,8 @@ class _HomeFormState extends State<HomeForm> {
           environmentalFriendliness = value;
         });
       },
-      onSaved: (value) {
-        setState(() {
-          environmentalFriendliness = value;
-        });
-      },
+      validator: (value) =>
+          value == null ? 'Please fill your preference' : null,
       items: environmentalFriendlinessList.map((String val) {
         return DropdownMenuItem(
           value: val,
@@ -209,11 +197,8 @@ class _HomeFormState extends State<HomeForm> {
           lightRailTravel = value;
         });
       },
-      onSaved: (value) {
-        setState(() {
-          lightRailTravel = value;
-        });
-      },
+      validator: (value) =>
+          value == null ? 'Please fill your preference' : null,
       items: lightRailTravelList.map((String val) {
         return DropdownMenuItem(
           value: val,
@@ -235,6 +220,13 @@ class _HomeFormState extends State<HomeForm> {
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixText: '\$',
       ),
+      validator: (newValue) {
+        if (newValue.isEmpty) {
+          return "can't empty";
+        } else {
+          return null;
+        }
+      },
     );
   }
 
@@ -248,6 +240,13 @@ class _HomeFormState extends State<HomeForm> {
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixText: 'minute(s)',
       ),
+      validator: (newValue) {
+        if (newValue.isEmpty) {
+          return "can't empty";
+        } else {
+          return null;
+        }
+      },
     );
   }
 
@@ -261,6 +260,13 @@ class _HomeFormState extends State<HomeForm> {
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixText: 'time(s)',
       ),
+      validator: (newValue) {
+        if (newValue.isEmpty) {
+          return "can't empty";
+        } else {
+          return null;
+        }
+      },
     );
   }
 
@@ -272,7 +278,7 @@ class _HomeFormState extends State<HomeForm> {
       ),
       value: privateTransportation,
       hint: Text(
-        'Select preference',
+        'Select your preference',
       ),
       isExpanded: true,
       onChanged: (value) {
@@ -280,11 +286,8 @@ class _HomeFormState extends State<HomeForm> {
           privateTransportation = value;
         });
       },
-      onSaved: (value) {
-        setState(() {
-          privateTransportation = value;
-        });
-      },
+      validator: (value) =>
+          value == null ? 'Please fill your preference' : null,
       items: privateTransporationList.map((String val) {
         return DropdownMenuItem(
           value: val,
@@ -306,6 +309,13 @@ class _HomeFormState extends State<HomeForm> {
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixText: 'minute(s)',
       ),
+      validator: (newValue) {
+        if (newValue.isEmpty) {
+          return "can't empty";
+        } else {
+          return null;
+        }
+      },
     );
   }
 
@@ -325,11 +335,8 @@ class _HomeFormState extends State<HomeForm> {
           favoritePlace = value;
         });
       },
-      onSaved: (value) {
-        setState(() {
-          favoritePlace = value;
-        });
-      },
+      validator: (value) =>
+          value == null ? 'Please fill your preference' : null,
       items: favoritePlaceList.map((String val) {
         return DropdownMenuItem(
           value: val,
@@ -357,11 +364,8 @@ class _HomeFormState extends State<HomeForm> {
           livingStreet = value;
         });
       },
-      onSaved: (value) {
-        setState(() {
-          livingStreet = value;
-        });
-      },
+      validator: (value) =>
+          value == null ? 'Please fill your preference' : null,
       items: livingStreetList.map((String val) {
         return DropdownMenuItem(
           value: val,
@@ -381,7 +385,7 @@ class _HomeFormState extends State<HomeForm> {
       ),
       value: preferredTransportation,
       hint: Text(
-        'Select preference',
+        'Select your preference',
       ),
       isExpanded: true,
       onChanged: (value) {
@@ -389,11 +393,8 @@ class _HomeFormState extends State<HomeForm> {
           preferredTransportation = value;
         });
       },
-      onSaved: (value) {
-        setState(() {
-          preferredTransportation = value;
-        });
-      },
+      validator: (value) =>
+          value == null ? 'Please fill your preference' : null,
       items: preferredTransportationList.map((String val) {
         return DropdownMenuItem(
           value: val,
@@ -415,6 +416,13 @@ class _HomeFormState extends State<HomeForm> {
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixText: '°(degree)',
       ),
+      validator: (newValue) {
+        if (newValue.isEmpty) {
+          return "can't empty";
+        } else {
+          return null;
+        }
+      },
     );
   }
 
@@ -426,7 +434,7 @@ class _HomeFormState extends State<HomeForm> {
       ),
       value: roadSurface,
       hint: Text(
-        'Select preference',
+        'Select your preference',
       ),
       isExpanded: true,
       onChanged: (value) {
@@ -434,11 +442,8 @@ class _HomeFormState extends State<HomeForm> {
           roadSurface = value;
         });
       },
-      onSaved: (value) {
-        setState(() {
-          roadSurface = value;
-        });
-      },
+      validator: (value) =>
+          value == null ? 'Please fill your preference' : null,
       items: roadSurfaceList.map((String val) {
         return DropdownMenuItem(
           value: val,
@@ -458,7 +463,7 @@ class _HomeFormState extends State<HomeForm> {
       ),
       value: sharingTransportation,
       hint: Text(
-        'Select preference',
+        'Select your preference',
       ),
       isExpanded: true,
       onChanged: (value) {
@@ -466,12 +471,116 @@ class _HomeFormState extends State<HomeForm> {
           sharingTransportation = value;
         });
       },
-      onSaved: (value) {
+      validator: (value) =>
+          value == null ? 'Please fill your preference' : null,
+      items: sharingTransportationList.map((String val) {
+        return DropdownMenuItem(
+          value: val,
+          child: Text(
+            val,
+          ),
+        );
+      }).toList(),
+    );
+  }
+
+  TextFormField buildCapacityFormField() {
+    return TextFormField(
+      keyboardType: TextInputType.number,
+      onSaved: (newValue) => roadInclination = newValue as int,
+      decoration: InputDecoration(
+        labelText: "Capacity utilization of pulbic transportation",
+        hintText: "Min. rate of capacity utilization",
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        suffixText: '%(percent)',
+      ),
+      validator: (newValue) {
+        if (newValue.isEmpty) {
+          return "can't empty";
+        } else {
+          return null;
+        }
+      },
+    );
+  }
+
+  DropdownButtonFormField buildWeatherFormField() {
+    return DropdownButtonFormField(
+      decoration: InputDecoration(
+        labelText: "Weather",
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+      ),
+      value: weather,
+      hint: Text(
+        'Select your preference',
+      ),
+      isExpanded: true,
+      onChanged: (value) {
         setState(() {
-          sharingTransportation = value;
+          weather = value;
         });
       },
-      items: sharingTransportationList.map((String val) {
+      validator: (value) =>
+          value == null ? 'Please fill your preference' : null,
+      items: weatherList.map((String val) {
+        return DropdownMenuItem(
+          value: val,
+          child: Text(
+            val,
+          ),
+        );
+      }).toList(),
+    );
+  }
+
+  DropdownButtonFormField buildCurrentLocationFormField() {
+    return DropdownButtonFormField(
+      decoration: InputDecoration(
+        labelText: "Current Location service",
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+      ),
+      value: currentLocation,
+      hint: Text(
+        'Do you prefer?',
+      ),
+      isExpanded: true,
+      onChanged: (value) {
+        setState(() {
+          currentLocation = value;
+        });
+      },
+      validator: (value) =>
+          value == null ? 'Please fill your preference' : null,
+      items: currentLoactionList.map((String val) {
+        return DropdownMenuItem(
+          value: val,
+          child: Text(
+            val,
+          ),
+        );
+      }).toList(),
+    );
+  }
+
+  DropdownButtonFormField buildTrafficConditionFormField() {
+    return DropdownButtonFormField(
+      decoration: InputDecoration(
+        labelText: "Real-time traffic condition service",
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+      ),
+      value: trafficCondtion,
+      hint: Text(
+        'Do you prefer?',
+      ),
+      isExpanded: true,
+      onChanged: (value) {
+        setState(() {
+          trafficCondtion = value;
+        });
+      },
+      validator: (value) =>
+          value == null ? 'Please fill your preference' : null,
+      items: trafficCondtionList.map((String val) {
         return DropdownMenuItem(
           value: val,
           child: Text(

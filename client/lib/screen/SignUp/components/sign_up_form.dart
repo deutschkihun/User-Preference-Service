@@ -7,7 +7,6 @@ import 'package:upp/helper/keyboard.dart';
 import 'package:upp/screen/SignIn/signinScreen.dart';
 import 'package:upp/screen/SignUp/components/user.dart';
 import 'package:http/http.dart' as http;
-
 import '../../../constants.dart';
 import '../../../size_config.dart';
 
@@ -18,11 +17,14 @@ class SignUpForm extends StatefulWidget {
 
 class _SignUpFormState extends State<SignUpForm> {
   final _formKey = GlobalKey<FormState>();
-  String gender;
-  String paymentMethod;
-  String subscription;
-  String handicapped;
-  String confirmPassword;
+  String email,
+      age,
+      password,
+      confirmPassword,
+      gender,
+      paymentMethod,
+      subscription,
+      handicapped;
   List<String> paymentMethodList = [
     'CreditCard',
     'Girodirekt',
@@ -34,7 +36,6 @@ class _SignUpFormState extends State<SignUpForm> {
   List<String> handicappedList = ['Yes', 'No'];
 
   String url = "http://localhost:8080/register";
-  User user = User("", "", 0);
   bool remember = false;
   final List<String> errors = [];
 
@@ -56,9 +57,9 @@ class _SignUpFormState extends State<SignUpForm> {
     var res = await http.post(url,
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
-          'Email': user.email,
-          'Password': user.password,
-          'Age': user.age,
+          'Email': email,
+          'Password': password,
+          'Age': age,
           'Gender': gender,
           'Subscription': subscription,
           'PaymentMethod': paymentMethod,
@@ -105,8 +106,6 @@ class _SignUpFormState extends State<SignUpForm> {
               if (_formKey.currentState.validate()) {
                 // _formKey.currentState.save();
                 //save();
-                //debugPrint('movieTitle: $user.email');
-                print(user.email); // working
                 KeyboardUtil.hideKeyboard(context);
                 Navigator.pushNamed(context, SignInScreen.routeName);
               }
@@ -124,7 +123,7 @@ class _SignUpFormState extends State<SignUpForm> {
       onChanged: (value) {
         if (value.isNotEmpty) {
           removeError(error: kPassNullError);
-        } else if (value.isNotEmpty && user.password == confirmPassword) {
+        } else if (value.isNotEmpty && password == confirmPassword) {
           removeError(error: kMatchPassError);
         }
         confirmPassword = value;
@@ -133,7 +132,7 @@ class _SignUpFormState extends State<SignUpForm> {
         if (value.isEmpty) {
           addError(error: kPassNullError);
           return "";
-        } else if ((user.password != value)) {
+        } else if ((password != value)) {
           addError(error: kMatchPassError);
           return "";
         }
@@ -151,14 +150,15 @@ class _SignUpFormState extends State<SignUpForm> {
   TextFormField buildPasswordFormField() {
     return TextFormField(
       obscureText: true,
-      onSaved: (newValue) => user.password = newValue,
+      controller: TextEditingController(text: password),
       onChanged: (value) {
         if (value.isNotEmpty) {
           removeError(error: kPassNullError);
         } else if (value.length >= 8) {
           removeError(error: kShortPassError);
         }
-        user.password = value;
+        password = value;
+        return null;
       },
       validator: (value) {
         if (value.isEmpty) {
@@ -182,15 +182,14 @@ class _SignUpFormState extends State<SignUpForm> {
   TextFormField buildEmailFormField() {
     return TextFormField(
       keyboardType: TextInputType.emailAddress,
-      controller: TextEditingController(text: user.email),
-      //onSaved: (newValue) => user.email = newValue,
+      controller: TextEditingController(text: email),
       onChanged: (value) {
         if (value.isNotEmpty) {
           removeError(error: kEmailNullError);
         } else if (emailValidatorRegExp.hasMatch(value)) {
           removeError(error: kInvalidEmailError);
         }
-        user.email = value;
+        email = value;
         return null;
       },
       validator: (value) {
@@ -215,19 +214,22 @@ class _SignUpFormState extends State<SignUpForm> {
   TextFormField buildAgeFormField() {
     return TextFormField(
       keyboardType: TextInputType.number,
-      onSaved: (newValue) => user.age = newValue as int,
-      /*validator: (newValue) {
+      onChanged: (value) {
+        if (value.isNotEmpty) {
+          age = value;
+        }
+      },
+      validator: (newValue) {
         if (newValue.isEmpty) {
           return "can't empty";
         } else {
           return null;
         }
-      },*/
+      },
       decoration: InputDecoration(
         labelText: "Age",
         hintText: "Enter your age",
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/User.svg"),
       ),
     );
   }
@@ -237,11 +239,10 @@ class _SignUpFormState extends State<SignUpForm> {
       decoration: InputDecoration(
         labelText: "Gender",
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/User.svg"),
       ),
       value: gender,
       hint: Text(
-        'Select gender',
+        'Select your gender',
       ),
       isExpanded: true,
       onChanged: (value) {
@@ -249,11 +250,7 @@ class _SignUpFormState extends State<SignUpForm> {
           gender = value;
         });
       },
-      onSaved: (value) {
-        setState(() {
-          gender = value;
-        });
-      },
+      validator: (value) => value == null ? 'Please fill in your gender' : null,
       items: genderList.map((String val) {
         return DropdownMenuItem(
           value: val,
@@ -270,8 +267,6 @@ class _SignUpFormState extends State<SignUpForm> {
       decoration: InputDecoration(
         labelText: "Mobility subscription service",
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon:
-            CustomSurffixIcon(svgIcon: "assets/icons/Chat bubble Ircon.svg"),
       ),
       value: subscription,
       hint: Text(
@@ -283,11 +278,8 @@ class _SignUpFormState extends State<SignUpForm> {
           subscription = value;
         });
       },
-      onSaved: (value) {
-        setState(() {
-          subscription = value;
-        });
-      },
+      validator: (value) =>
+          value == null ? 'Please fill in your subscription' : null,
       items: subscriptionList.map((String val) {
         return DropdownMenuItem(
           value: val,
@@ -304,7 +296,6 @@ class _SignUpFormState extends State<SignUpForm> {
       decoration: InputDecoration(
         labelText: "Payment method",
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Cash.svg"),
       ),
       value: paymentMethod,
       hint: Text(
@@ -316,11 +307,8 @@ class _SignUpFormState extends State<SignUpForm> {
           paymentMethod = value;
         });
       },
-      onSaved: (value) {
-        setState(() {
-          paymentMethod = value;
-        });
-      },
+      validator: (value) =>
+          value == null ? 'Please fill in your payment method' : null,
       items: paymentMethodList.map((String val) {
         return DropdownMenuItem(
           value: val,
@@ -337,11 +325,10 @@ class _SignUpFormState extends State<SignUpForm> {
       decoration: InputDecoration(
         labelText: "For the physically handicapped",
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/User.svg"),
       ),
       value: handicapped,
       hint: Text(
-        'Need any rsupport?',
+        'Need support?',
       ),
       isExpanded: true,
       onChanged: (value) {
@@ -349,11 +336,8 @@ class _SignUpFormState extends State<SignUpForm> {
           handicapped = value;
         });
       },
-      onSaved: (value) {
-        setState(() {
-          handicapped = value;
-        });
-      },
+      validator: (value) =>
+          value == null ? 'Please fill in whether you need support' : null,
       items: handicappedList.map((String val) {
         return DropdownMenuItem(
           value: val,
