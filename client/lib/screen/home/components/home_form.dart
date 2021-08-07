@@ -2,8 +2,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:upp/components/default_button.dart';
 import 'package:upp/helper/keyboard.dart';
-import 'package:upp/screen/Edit/editscreen.dart';
+//import 'package:upp/screen/Edit/editscreen.dart';
 import 'package:http/http.dart' as http;
+import 'package:upp/screen/success/success_screen.dart';
 
 import '../../../size_config.dart';
 
@@ -167,7 +168,7 @@ class _HomeFormState extends State<HomeForm> {
                 // _formKey.currentState.save();
                 //save();
                 KeyboardUtil.hideKeyboard(context);
-                Navigator.pushNamed(context, EditScreen.routeName);
+                Navigator.pushNamed(context, SuccessScreen.routeName);
               }
             },
           ),

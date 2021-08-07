@@ -1,7 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:upp/screen/Edit/editscreen.dart';
 import 'package:upp/screen/SignUp/sign_up_screen.dart';
+import 'package:upp/screen/Success/success_screen.dart';
 import 'package:upp/screen/home/home_screen.dart';
+import 'package:upp/screen/menu/menu_screen.dart';
 import 'package:upp/screen/splash/splash_screen.dart';
 import 'package:upp/screen/SignIn/signinScreen.dart';
 
@@ -13,4 +15,6 @@ final Map<String, WidgetBuilder> routes = {
   HomeScreen.routeName: (context) => HomeScreen(),
   SignUpScreen.routeName: (context) => SignUpScreen(),
   EditScreen.routeName: (context) => EditScreen(),
+  SuccessScreen.routeName: (context) => SuccessScreen(),
+  MenuScreen.routeName: (context) => MenuScreen(),
 };
