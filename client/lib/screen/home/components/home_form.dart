@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:upp/components/default_button.dart';
 import 'package:upp/helper/keyboard.dart';
-import 'package:upp/screen/SignIn/signinScreen.dart';
+import 'package:upp/screen/Edit/editscreen.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../size_config.dart';
@@ -102,6 +102,18 @@ class _HomeFormState extends State<HomeForm> {
       key: _formKey,
       child: Column(
         children: [
+          Text("1.Dynamic preference",
+              style: TextStyle(
+                fontSize: getProportionateScreenWidth(25),
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+                height: 1.5,
+              )),
+          Text(
+            "Fill in your dynamic preference",
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: getProportionateScreenHeight(30)),
           buildEnviromentalFriendlinessFormField(),
           SizedBox(height: getProportionateScreenHeight(30)),
           buildLightRailTravelFormField(),
@@ -128,6 +140,18 @@ class _HomeFormState extends State<HomeForm> {
           SizedBox(height: getProportionateScreenHeight(30)),
           buildSharingTransportationFormField(),
           SizedBox(height: getProportionateScreenHeight(30)),
+          Text("2.Situational context",
+              style: TextStyle(
+                fontSize: getProportionateScreenWidth(25),
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+                height: 1.5,
+              )),
+          Text(
+            "Fill in your situational context",
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: getProportionateScreenHeight(30)),
           buildCapacityFormField(),
           SizedBox(height: getProportionateScreenHeight(30)),
           buildWeatherFormField(),
@@ -143,7 +167,7 @@ class _HomeFormState extends State<HomeForm> {
                 // _formKey.currentState.save();
                 //save();
                 KeyboardUtil.hideKeyboard(context);
-                Navigator.pushNamed(context, SignInScreen.routeName);
+                Navigator.pushNamed(context, EditScreen.routeName);
               }
             },
           ),

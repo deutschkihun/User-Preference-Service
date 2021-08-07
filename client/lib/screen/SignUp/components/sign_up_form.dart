@@ -31,7 +31,12 @@ class _SignUpFormState extends State<SignUpForm> {
     'Applepay'
   ];
   List<String> genderList = ['male', 'female'];
-  List<String> subscriptionList = ['BahnCard', 'Nextbike', 'Stadtmobil'];
+  List<String> subscriptionList = [
+    'BahnCard',
+    'Nextbike',
+    'Stadtmobil',
+    'Nothing'
+  ];
   List<String> handicappedList = ['Yes', 'No'];
 
   String url = "http://localhost:8080/register";
