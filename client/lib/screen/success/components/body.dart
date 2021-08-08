@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:upp/components/default_button.dart';
-import 'package:upp/screen/Edit/editscreen.dart';
-import 'package:upp/screen/menu/menu_screen.dart';
+import 'package:upp/screen/SignIn/signinScreen.dart';
 import 'package:upp/size_config.dart';
 
 class Body extends StatelessWidget {
@@ -28,9 +27,9 @@ class Body extends StatelessWidget {
         SizedBox(
           width: SizeConfig.screenWidth * 0.6,
           child: DefaultButton(
-            text: "Continue",
+            text: "Let's sign in",
             press: () {
-              Navigator.pushNamed(context, MenuScreen.routeName);
+              Navigator.pushNamed(context, SignInScreen.routeName);
             },
           ),
         ),

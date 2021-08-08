@@ -4,8 +4,8 @@ import 'package:upp/components/custom_surfix_icon.dart';
 import 'package:upp/components/default_button.dart';
 import 'package:upp/components/form_error.dart';
 import 'package:upp/helper/keyboard.dart';
-import 'package:upp/screen/SignIn/signinScreen.dart';
 import 'package:http/http.dart' as http;
+import 'package:upp/screen/home/home_screen.dart';
 import '../../../constants.dart';
 import '../../../size_config.dart';
 
@@ -111,7 +111,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 // _formKey.currentState.save();
                 //save();
                 KeyboardUtil.hideKeyboard(context);
-                Navigator.pushNamed(context, SignInScreen.routeName);
+                Navigator.pushNamed(context, HomeScreen.routeName);
               }
             },
           ),

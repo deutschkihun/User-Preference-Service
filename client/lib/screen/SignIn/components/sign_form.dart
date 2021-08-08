@@ -5,6 +5,7 @@ import 'package:upp/components/form_error.dart';
 import 'package:upp/constants.dart';
 import 'package:upp/helper/keyboard.dart';
 import 'package:upp/screen/home/home_screen.dart';
+import 'package:upp/screen/menu/menu_screen.dart';
 import 'package:upp/size_config.dart';
 
 class SignForm extends StatefulWidget {
@@ -50,7 +51,7 @@ class _SignFormState extends State<SignForm> {
               _formKey.currentState.save();
               // if all are valid then go to success screen
               KeyboardUtil.hideKeyboard(context);
-              Navigator.pushNamed(context, HomeScreen.routeName);
+              Navigator.pushNamed(context, MenuScreen.routeName);
             }
           },
         )
