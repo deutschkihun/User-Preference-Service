@@ -16,7 +16,7 @@ class HomeForm extends StatefulWidget {
 class _HomeFormState extends State<HomeForm> {
   final _formKey = GlobalKey<FormState>();
   final List<String> errors = [];
-  String url = "http://localhost:8080/dynamic_preference_profile";
+  String url = "http://localhost:8080/api/mobilityPreferences/";
   String environmentalFriendliness,
       lightRailTravel,
       privateTransportation,
@@ -27,8 +27,13 @@ class _HomeFormState extends State<HomeForm> {
       sharingTransportation,
       weather,
       currentLocation,
-      trafficCondtion;
-  int travelCost, travelTime, waitingTime, transfer, roadInclination;
+      trafficCondtion,
+      travelCost,
+      travelTime,
+      waitingTime,
+      transfer,
+      roadInclination,
+      capacityUtilization;
   List<String> environmentalFriendlinessList = ['Yes', 'No'];
   List<String> lightRailTravelList = ['Yes', 'No'];
   List<String> favoritePlaceList = ['Yes', 'No'];
@@ -74,27 +79,28 @@ class _HomeFormState extends State<HomeForm> {
   ];
 
   Future save() async {
-    var res = await http.post(url,
+    var res = await http.post(Uri.parse(url),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
-          'Environmental friendliness': environmentalFriendliness,
-          'Light rail travel': lightRailTravel,
-          'Travel cost': travelCost,
-          'Travel time': travelTime,
-          'Transfer': transfer,
-          'Private Transportation': privateTransportation,
-          'Waiting time': waitingTime,
-          'Favorite place': favoritePlace,
-          'Living street': livingStreet,
-          'Preferred transportation': privateTransportation,
-          'Road inclination': roadInclination,
-          'Road surface': roadSurface,
-          'Sharing Transportation': sharingTransportation
+          'environmentalFriendliness': environmentalFriendliness,
+          'lightRailTravel': lightRailTravel,
+          'travelCost': travelCost,
+          'travelTime': travelTime,
+          'transfer': transfer,
+          'privateTransportation': privateTransportation,
+          'waitingTime': waitingTime,
+          'favoritePlace': favoritePlace,
+          'livingStreet': livingStreet,
+          'preferredTransportation': privateTransportation,
+          'roadInclination': roadInclination,
+          'roadSurface': roadSurface,
+          'sharingTransportation': sharingTransportation,
+          'capacityUtilization': capacityUtilization,
+          'weather': weather,
+          'currentLocation': currentLocation,
+          'trafficCondition': trafficCondtion,
         }));
     print(res.body);
-    if (res.body != null) {
-      Navigator.pop(context);
-    }
   }
 
   @override
@@ -166,7 +172,7 @@ class _HomeFormState extends State<HomeForm> {
             press: () {
               if (_formKey.currentState.validate()) {
                 // _formKey.currentState.save();
-                //save();
+                save();
                 KeyboardUtil.hideKeyboard(context);
                 Navigator.pushNamed(context, SuccessScreen.routeName);
               }
@@ -238,7 +244,7 @@ class _HomeFormState extends State<HomeForm> {
   TextFormField buildTravelCostFormField() {
     return TextFormField(
       keyboardType: TextInputType.number,
-      onSaved: (newValue) => travelCost = newValue as int,
+      onSaved: (newValue) => travelCost = newValue,
       decoration: InputDecoration(
         labelText: "Travel cost",
         hintText: "Max. travel cost",
@@ -252,13 +258,18 @@ class _HomeFormState extends State<HomeForm> {
           return null;
         }
       },
+      onChanged: (value) {
+        if (value.isNotEmpty) {
+          travelCost = value;
+        }
+      },
     );
   }
 
   TextFormField buildTravelTimeFormField() {
     return TextFormField(
       keyboardType: TextInputType.number,
-      onSaved: (newValue) => travelCost = newValue as int,
+      onSaved: (newValue) => travelTime = newValue,
       decoration: InputDecoration(
         labelText: "Travel time",
         hintText: "Max. travel time",
@@ -272,13 +283,18 @@ class _HomeFormState extends State<HomeForm> {
           return null;
         }
       },
+      onChanged: (value) {
+        if (value.isNotEmpty) {
+          travelTime = value;
+        }
+      },
     );
   }
 
   TextFormField buildTransferFormField() {
     return TextFormField(
       keyboardType: TextInputType.number,
-      onSaved: (newValue) => travelCost = newValue as int,
+      onSaved: (newValue) => transfer = newValue,
       decoration: InputDecoration(
         labelText: "Transfer",
         hintText: "Max. number of transfers",
@@ -290,6 +306,11 @@ class _HomeFormState extends State<HomeForm> {
           return "can't empty";
         } else {
           return null;
+        }
+      },
+      onChanged: (value) {
+        if (value.isNotEmpty) {
+          transfer = value;
         }
       },
     );
@@ -327,7 +348,7 @@ class _HomeFormState extends State<HomeForm> {
   TextFormField buildWaitingTimeFormField() {
     return TextFormField(
       keyboardType: TextInputType.number,
-      onSaved: (newValue) => waitingTime = newValue as int,
+      onSaved: (newValue) => waitingTime = newValue,
       decoration: InputDecoration(
         labelText: "Waiting time",
         hintText: "Max. waiting time",
@@ -339,6 +360,11 @@ class _HomeFormState extends State<HomeForm> {
           return "can't empty";
         } else {
           return null;
+        }
+      },
+      onChanged: (value) {
+        if (value.isNotEmpty) {
+          waitingTime = value;
         }
       },
     );
@@ -434,7 +460,7 @@ class _HomeFormState extends State<HomeForm> {
   TextFormField buildRoadInclinationFormField() {
     return TextFormField(
       keyboardType: TextInputType.number,
-      onSaved: (newValue) => roadInclination = newValue as int,
+      onSaved: (newValue) => roadInclination = newValue,
       decoration: InputDecoration(
         labelText: "Road inclination",
         hintText: "Max. road inclination",
@@ -446,6 +472,11 @@ class _HomeFormState extends State<HomeForm> {
           return "can't empty";
         } else {
           return null;
+        }
+      },
+      onChanged: (value) {
+        if (value.isNotEmpty) {
+          roadInclination = value;
         }
       },
     );
@@ -512,7 +543,7 @@ class _HomeFormState extends State<HomeForm> {
   TextFormField buildCapacityFormField() {
     return TextFormField(
       keyboardType: TextInputType.number,
-      onSaved: (newValue) => roadInclination = newValue as int,
+      onSaved: (newValue) => capacityUtilization = newValue,
       decoration: InputDecoration(
         labelText: "Capacity utilization of pulbic transportation",
         hintText: "Min. rate of capacity utilization",
@@ -524,6 +555,11 @@ class _HomeFormState extends State<HomeForm> {
           return "can't empty";
         } else {
           return null;
+        }
+      },
+      onChanged: (value) {
+        if (value.isNotEmpty) {
+          capacityUtilization = value;
         }
       },
     );

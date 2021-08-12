@@ -17,13 +17,13 @@ class SignUpForm extends StatefulWidget {
 class _SignUpFormState extends State<SignUpForm> {
   final _formKey = GlobalKey<FormState>();
   String email,
-      age,
       password,
       confirmPassword,
       gender,
       paymentMethod,
       subscription,
-      handicapped;
+      handicapped,
+      age;
   List<String> paymentMethodList = [
     'CreditCard',
     'Girodirekt',
@@ -39,7 +39,7 @@ class _SignUpFormState extends State<SignUpForm> {
   ];
   List<String> handicappedList = ['Yes', 'No'];
 
-  String url = "http://localhost:8080/register";
+  String url = "http://localhost:8080/api/mobilityUsers/";
   bool remember = false;
   final List<String> errors = [];
 
@@ -58,21 +58,19 @@ class _SignUpFormState extends State<SignUpForm> {
   }
 
   Future save() async {
-    var res = await http.post(url,
-        headers: {'Content-Type': 'application/json'},
+    await http.post(Uri.parse(url),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
         body: json.encode({
-          'Email': email,
-          'Password': password,
-          'Age': age,
-          'Gender': gender,
-          'Subscription': subscription,
-          'PaymentMethod': paymentMethod,
-          'Handicapped': handicapped
+          'email': email,
+          'password': password,
+          'age': age,
+          'gender': gender,
+          'subscription': subscription,
+          'paymentMethod': paymentMethod,
+          'handicapped': handicapped
         }));
-    print(res.body);
-    if (res.body != null) {
-      Navigator.pop(context);
-    }
   }
 
   @override
@@ -108,8 +106,7 @@ class _SignUpFormState extends State<SignUpForm> {
             text: "Save",
             press: () {
               if (_formKey.currentState.validate()) {
-                // _formKey.currentState.save();
-                //save();
+                save();
                 KeyboardUtil.hideKeyboard(context);
                 Navigator.pushNamed(context, HomeScreen.routeName);
               }
@@ -218,16 +215,17 @@ class _SignUpFormState extends State<SignUpForm> {
   TextFormField buildAgeFormField() {
     return TextFormField(
       keyboardType: TextInputType.number,
-      onChanged: (value) {
-        if (value.isNotEmpty) {
-          age = value;
-        }
-      },
+      onSaved: (newValue) => age = newValue,
       validator: (newValue) {
         if (newValue.isEmpty) {
           return "can't empty";
         } else {
           return null;
+        }
+      },
+      onChanged: (value) {
+        if (value.isNotEmpty) {
+          age = value;
         }
       },
       decoration: InputDecoration(

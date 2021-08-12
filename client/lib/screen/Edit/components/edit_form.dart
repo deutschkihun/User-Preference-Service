@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:upp/components/default_button.dart';
 import 'package:upp/helper/keyboard.dart';
-import 'package:upp/screen/SignIn/signinScreen.dart';
 import 'package:http/http.dart' as http;
 import 'package:upp/screen/menu/menu_screen.dart';
 import '../../../size_config.dart';
@@ -15,7 +14,6 @@ class EditForm extends StatefulWidget {
 class _EditFormState extends State<EditForm> {
   final _formKey = GlobalKey<FormState>();
   final List<String> errors = [];
-  String url = "http://localhost:8080/dynamic_preference_profile";
   String environmentalFriendliness,
       lightRailTravel,
       privateTransportation,
@@ -90,6 +88,8 @@ class _EditFormState extends State<EditForm> {
     'Electric-scooter (VOI)',
     'Not preferred'
   ];
+
+  String url = 'http://localhost:8080/dynamic_preference_profile';
 
   Future save() async {
     var res = await http.post(url,
