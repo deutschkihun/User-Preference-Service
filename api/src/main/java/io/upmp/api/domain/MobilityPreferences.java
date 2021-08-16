@@ -12,11 +12,11 @@ import javax.persistence.*;
 public class MobilityPreferences {
 
     @Id @GeneratedValue
-    @Column(name = "mobility_preference_id")
+    //@Column(name = "mobility_preference_id")
     private Long id;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mobility_user_id")
     private MobilityUsers mobilityUsers;
 
