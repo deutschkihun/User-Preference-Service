@@ -252,7 +252,7 @@ class _SignUpFormState extends State<SignUpForm> {
           gender = value;
         });
       },
-      validator: (value) => value == null ? 'Please fill in your gender' : null,
+      validator: (value) => value == null ? "can't empty" : null,
       items: genderList.map((String val) {
         return DropdownMenuItem(
           value: val,
@@ -280,8 +280,7 @@ class _SignUpFormState extends State<SignUpForm> {
           subscription = value;
         });
       },
-      validator: (value) =>
-          value == null ? 'Please fill in your subscription' : null,
+      validator: (value) => value == null ? "can't empty" : null,
       items: subscriptionList.map((String val) {
         return DropdownMenuItem(
           value: val,
@@ -309,8 +308,7 @@ class _SignUpFormState extends State<SignUpForm> {
           paymentMethod = value;
         });
       },
-      validator: (value) =>
-          value == null ? 'Please fill in your payment method' : null,
+      validator: (value) => value == null ? "can't empty" : null,
       items: paymentMethodList.map((String val) {
         return DropdownMenuItem(
           value: val,
@@ -338,8 +336,7 @@ class _SignUpFormState extends State<SignUpForm> {
           handicapped = value;
         });
       },
-      validator: (value) =>
-          value == null ? 'Please fill in whether you need support' : null,
+      validator: (value) => value == null ? "can't empty" : null,
       items: handicappedList.map((String val) {
         return DropdownMenuItem(
           value: val,

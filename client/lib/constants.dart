@@ -26,9 +26,9 @@ const defaultDuration = Duration(milliseconds: 250);
 final RegExp emailValidatorRegExp =
     RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 const String kEmailNullError = "Please enter your email";
-const String kInvalidEmailError = "Please enter valid or registered email";
+const String kInvalidEmailError = "Please enter valid email";
 const String kPassNullError = "Please enter your password";
-const String kShortPassError = "Password is too short or wrong";
+const String kShortPassError = "Password is too short";
 const String kMatchPassError = "Passwords don't match";
 
 final otpInputDecoration = InputDecoration(
