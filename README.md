@@ -3,6 +3,15 @@
 > Design of a generic preference model and integration with mobility service called User preference service 
 
 
+## Motivation 
+
+Since the rapid industrial development and urbanisation, the number of cars on the road has increased dramatically. Furthermore,  due to CO2 emissions, air pollution is also significantly worse than in the past. These problems have a negative impact on society. In order to solve these problems, people have begun to think about alternative mobility. In particular, demand and needs for mobility services tailored to individual mobility preferences have increased.
+This social background motivates this project to provide a personalized mobility solution for mobility users.
+
+## Goal 
+
+
+
 User preference service provide many different user preferences based on the literature research and the applications that already exist. 
 This service lets mobility users select user preferences. Mobility users can choose their mobility preferences in this application directly. 
 
