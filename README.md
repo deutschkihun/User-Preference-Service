@@ -8,8 +8,13 @@
 Since the rapid industrial development and urbanisation, the number of cars on the road has increased dramatically. Furthermore,  due to CO2 emissions, air pollution is also significantly worse than in the past. These problems have a negative impact on society. In order to solve these problems, people have begun to think about alternative mobility. In particular, demand and needs for mobility services tailored to individual mobility preferences have increased.
 This social background motivates this project to provide a personalized mobility solution for mobility users.
 
-## Goal 
+## Goal / Tasks
 
+Designing a generic preference model,Integration with the user preferenced service
+
+-> fwefwef
+
+​
 
 ## Approach 
 
