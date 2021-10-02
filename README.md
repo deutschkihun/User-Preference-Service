@@ -6,7 +6,7 @@
 User preference service provide many different user preferences based on the literature research and the applications that already exist. 
 This service lets mobility users select user preferences. Mobility users can choose their mobility preferences in this application directly. 
 
-![video](https://github.com/deutschkihun/UserPreferenceService/issues/1#issue-1014140689)
+![Watch the video](https://github.com/deutschkihun/UserPreferenceService/issues/1#issue-1014140689)
 
 
 It doesn't rely on any JavaScript frameworks or
