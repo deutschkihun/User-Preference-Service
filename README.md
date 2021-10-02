@@ -1,62 +1,23 @@
 # User preference service 
 
-> Design of a generic preference model and integration with mobility service called User preference service 
-
+> Design of a generic preference model and integration with mobility service called User preference service. User preference service provide many different user preferences based on the literature research and the applications that already exist. This service lets mobility users select user preferences. Mobility users can choose their mobility preferences in this application directly. 
 
 ## Motivation 
 
 Since the rapid industrial development and urbanisation, the number of cars on the road has increased dramatically. Furthermore,  due to CO2 emissions, air pollution is also significantly worse than in the past. These problems have a negative impact on society. In order to solve these problems, people have begun to think about alternative mobility. In particular, demand and needs for mobility services tailored to individual mobility preferences have increased.
 This social background motivates this project to provide a personalized mobility solution for mobility users.
 
-## Goal / Tasks
+## Goal
 
 Designing a generic preference model,Integration with the user preferenced service
 
--> fwefwef
-
-​
-
-## Approach 
-
 ## Prototype 
-
-## How to use this project 
-
-
-
-User preference service provide many different user preferences based on the literature research and the applications that already exist. 
-This service lets mobility users select user preferences. Mobility users can choose their mobility preferences in this application directly. 
 
 ![Watch the video](https://github.com/deutschkihun/UserPreferenceService/issues/1#issue-1014140689)
 
 
-It doesn't rely on any JavaScript frameworks or
-libraries. Optimized for cross-device use, gracefully degrades in older
-browsers, and offers an experience that is accessible from the get-go.
+## How to use this project 
 
-> ### Limited support
-
-> Material Design Lite is now in limited support, with development having moved to the
-> [Material Components for the web](https://github.com/material-components/material-components-web) repository.
-
-> No further development is taking place in MDL by the core team, but we are happy to review PRs, fix critical bugs and
-> push out new releases. No breaking changes will be accepted.
-
-## Use MDL on your site?
-
-**This document is targeted at developers that will contribute to or compile
-MDL. If you are looking to use MDL on your website or web app please head to
-[getmdl.io](http://getmdl.io).**
-
-## Browser Support
-
-
-| IE9 | IE10 | IE11 | Chrome | Opera | Firefox | Safari | Chrome (Android) | Mobile Safari |
-|-----|------|------|--------|-------|---------|--------|------------------|---------------|
-| B   | A    | A    | A      | A     | A       | A      | A                | A             |
-
-A-grade browsers are fully supported. B-grade browsers will gracefully degrade
-to our CSS-only experience.
 
 ### Download / Clone
 
