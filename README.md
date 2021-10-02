@@ -15,8 +15,19 @@ Designing a generic preference model,Integration with the user preferenced servi
 
 ![Watch the video](https://github.com/deutschkihun/UserPreferenceService/issues/1#issue-1014140689)
 
+## Technical detail 
 
-## How to use this project 
+This project works based on flutter from Dart (clientside application), Spring boot from Java (serverside application) and H2 Database.
+
+## How to use this project
+
+1.Download flutter file in the local machine 
+
+https://flutter.dev/docs/get-started/install
+
+```bash
+git clone https://github.com/google/material-design-lite.git
+```
 
 
 ### Download / Clone
@@ -27,44 +38,3 @@ Clone the repo using Git:
 git clone https://github.com/google/material-design-lite.git
 ```
 
-Alternatively you can [download](https://github.com/google/material-design-lite/archive/master.zip)
-this repository.
-
-Windows users, if you have trouble compiling due to line endings then make sure
-you configure git to checkout the repository with `lf` (unix) line endings. This
-can be achieved by setting `core.eol`.
-
-```bash
-git config core.eol lf
-git config core.autocrlf input
-git rm --cached -r .
-git reset --hard
-```
-
-> Remember, the master branch is considered unstable. Do not use this in
-production. Use a tagged state of the repository, npm, or bower for stability!
-
-## Feature requests
-
-MDL is currently in limited support mode, with no further development taking place by the core team.
-We are happy to accept and review pull requests for new functionality, however, as long as there are no breaking
-changes.
-
-## Want to contribute?
-
-If you found a bug, have any questions or want to contribute. Follow our
-[guidelines](https://github.com/google/material-design-lite/blob/mdl-1.x/CONTRIBUTING.md),
-and help improve the Material Design Lite. For more information visit our
-[wiki](https://github.com/google/material-design-lite/wiki).
-
-Please use the default branch, `mdl-1.x`.
-
-Take note that [Material Components for Web](https://github.com/material-components/material-components-web), which is MDL v2, is under early Alpha stages (which means everything is a moving target, and we can change anything at any moment). Use with caution.
-
-However, we would absolutely love to have people testing MCW and provide feedback about their experiences using it, especially integrating with other frameworks and libraries.
-
-## License
-
-© Google, 2015. Licensed under an
-[Apache-2](https://github.com/google/material-design-lite/blob/master/LICENSE)
-license.
