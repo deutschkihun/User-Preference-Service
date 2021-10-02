@@ -22,17 +22,23 @@ This project works based on flutter from Dart (clientside application), Spring b
 ## How to use this project
 
 1.Download flutter file in the local machine [download](https://flutter.dev/docs/get-started/install)
+
 2.Add the flutter tool to your path in bashrc or zshrc file (mac) 
 
 ```bash 
 $ export PATH="$PATH:`pwd`/flutter/bin"
 ```
 
+3.Run database (H2 Database) 
 
-```bash
-git clone https://github.com/google/material-design-lite.git
+```bash 
+$ cd api 
+$ cd h2
+$ cd bin 
+$ ./h2.sh
 ```
 
+Then h2 database will going to work on. For the access of database you need to set username and password (optional) based on the Spring boot setup 
 
 ### Download / Clone
 
