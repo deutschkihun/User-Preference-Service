@@ -253,7 +253,7 @@ class _HomeFormState extends State<HomeForm> {
       ),
       validator: (newValue) {
         if (newValue.isEmpty) {
-          return "can't empty";
+          return "please fill your preference";
         } else {
           return null;
         }
@@ -278,7 +278,7 @@ class _HomeFormState extends State<HomeForm> {
       ),
       validator: (newValue) {
         if (newValue.isEmpty) {
-          return "can't empty";
+          return "please fill your preference";
         } else {
           return null;
         }
@@ -303,7 +303,7 @@ class _HomeFormState extends State<HomeForm> {
       ),
       validator: (newValue) {
         if (newValue.isEmpty) {
-          return "can't empty";
+          return "please fill your preference";
         } else {
           return null;
         }
@@ -357,7 +357,7 @@ class _HomeFormState extends State<HomeForm> {
       ),
       validator: (newValue) {
         if (newValue.isEmpty) {
-          return "can't empty";
+          return "please fill your preference";
         } else {
           return null;
         }
@@ -469,7 +469,7 @@ class _HomeFormState extends State<HomeForm> {
       ),
       validator: (newValue) {
         if (newValue.isEmpty) {
-          return "can't empty";
+          return "please fill your preference";
         } else {
           return null;
         }
@@ -546,13 +546,13 @@ class _HomeFormState extends State<HomeForm> {
       onSaved: (newValue) => capacityUtilization = newValue,
       decoration: InputDecoration(
         labelText: "Capacity utilization of pulbic transportation",
-        hintText: "Min. rate of capacity utilization",
+        hintText: "Min. rate of capacity",
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixText: '%(percent)',
       ),
       validator: (newValue) {
         if (newValue.isEmpty) {
-          return "can't empty";
+          return "please fill your preference";
         } else {
           return null;
         }

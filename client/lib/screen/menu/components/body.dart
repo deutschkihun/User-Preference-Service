@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:upp/components/default_button.dart';
 import 'package:upp/screen/Edit/editscreen.dart';
-import 'package:upp/screen/SignIn/signinScreen.dart';
 import 'package:upp/size_config.dart';
 import '../../../constants.dart';
+import 'logout_form.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -34,15 +34,8 @@ class Body extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: SizeConfig.screenHeight * 0.05),
-                SizedBox(
-                  width: SizeConfig.screenWidth * 0.6,
-                  child: DefaultButton(
-                    text: "Log out",
-                    press: () {
-                      Navigator.pushNamed(context, SignInScreen.routeName);
-                    },
-                  ),
-                ),
+                Logout(),
+                SizedBox(height: SizeConfig.screenHeight * 0.05),
               ],
             ),
           ),

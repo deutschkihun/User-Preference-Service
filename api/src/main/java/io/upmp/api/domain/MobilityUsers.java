@@ -19,7 +19,7 @@ public class MobilityUsers {
     private String paymentMethod;
     private String handicapped;
 
-    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "mobility_preference_id")
     private MobilityPreferences mobilityPreferences;
 }

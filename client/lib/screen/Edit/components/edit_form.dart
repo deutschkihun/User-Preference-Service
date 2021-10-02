@@ -219,6 +219,7 @@ class _EditFormState extends State<EditForm> {
 
   TextFormField buildAgeFormField() {
     return TextFormField(
+      initialValue: "28",
       keyboardType: TextInputType.number,
       onChanged: (value) {
         if (value.isNotEmpty) {
@@ -227,7 +228,7 @@ class _EditFormState extends State<EditForm> {
       },
       validator: (newValue) {
         if (newValue.isEmpty) {
-          return "can't empty";
+          return "please fill your preference";
         } else {
           return null;
         }
@@ -247,16 +248,13 @@ class _EditFormState extends State<EditForm> {
         floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
       value: gender,
-      hint: Text(
-        'Select your gender',
-      ),
+      hint: Text('male', style: TextStyle(color: Colors.black)),
       isExpanded: true,
       onChanged: (value) {
         setState(() {
           gender = value;
         });
       },
-      validator: (value) => value == null ? 'Please fill in your gender' : null,
       items: genderList.map((String val) {
         return DropdownMenuItem(
           value: val,
@@ -275,17 +273,13 @@ class _EditFormState extends State<EditForm> {
         floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
       value: subscription,
-      hint: Text(
-        'Select subscription',
-      ),
+      hint: Text('Nextbike', style: TextStyle(color: Colors.black)),
       isExpanded: true,
       onChanged: (value) {
         setState(() {
           subscription = value;
         });
       },
-      validator: (value) =>
-          value == null ? 'Please fill in your subscription' : null,
       items: subscriptionList.map((String val) {
         return DropdownMenuItem(
           value: val,
@@ -304,17 +298,13 @@ class _EditFormState extends State<EditForm> {
         floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
       value: paymentMethod,
-      hint: Text(
-        'Select payment method',
-      ),
+      hint: Text('Paypal', style: TextStyle(color: Colors.black)),
       isExpanded: true,
       onChanged: (value) {
         setState(() {
           paymentMethod = value;
         });
       },
-      validator: (value) =>
-          value == null ? 'Please fill in your payment method' : null,
       items: paymentMethodList.map((String val) {
         return DropdownMenuItem(
           value: val,
@@ -333,17 +323,13 @@ class _EditFormState extends State<EditForm> {
         floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
       value: handicapped,
-      hint: Text(
-        'Need support?',
-      ),
+      hint: Text('No', style: TextStyle(color: Colors.black)),
       isExpanded: true,
       onChanged: (value) {
         setState(() {
           handicapped = value;
         });
       },
-      validator: (value) =>
-          value == null ? 'Please fill in whether you need support' : null,
       items: handicappedList.map((String val) {
         return DropdownMenuItem(
           value: val,
@@ -364,17 +350,13 @@ class _EditFormState extends State<EditForm> {
         floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
       value: environmentalFriendliness,
-      hint: Text(
-        'Do you prefer?',
-      ),
+      hint: Text('Yes', style: TextStyle(color: Colors.black)),
       isExpanded: true,
       onChanged: (value) {
         setState(() {
           environmentalFriendliness = value;
         });
       },
-      validator: (value) =>
-          value == null ? 'Please fill your preference' : null,
       items: environmentalFriendlinessList.map((String val) {
         return DropdownMenuItem(
           value: val,
@@ -393,17 +375,13 @@ class _EditFormState extends State<EditForm> {
         floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
       value: lightRailTravel,
-      hint: Text(
-        'Do you prefer?',
-      ),
+      hint: Text('Yes', style: TextStyle(color: Colors.black)),
       isExpanded: true,
       onChanged: (value) {
         setState(() {
           lightRailTravel = value;
         });
       },
-      validator: (value) =>
-          value == null ? 'Please fill your preference' : null,
       items: lightRailTravelList.map((String val) {
         return DropdownMenuItem(
           value: val,
@@ -417,6 +395,7 @@ class _EditFormState extends State<EditForm> {
 
   TextFormField buildTravelCostFormField() {
     return TextFormField(
+      initialValue: "150",
       keyboardType: TextInputType.number,
       onSaved: (newValue) => travelCost = newValue as int,
       decoration: InputDecoration(
@@ -427,7 +406,7 @@ class _EditFormState extends State<EditForm> {
       ),
       validator: (newValue) {
         if (newValue.isEmpty) {
-          return "can't empty";
+          return "please fill your preference";
         } else {
           return null;
         }
@@ -437,6 +416,7 @@ class _EditFormState extends State<EditForm> {
 
   TextFormField buildTravelTimeFormField() {
     return TextFormField(
+      initialValue: "120",
       keyboardType: TextInputType.number,
       onSaved: (newValue) => travelCost = newValue as int,
       decoration: InputDecoration(
@@ -447,7 +427,7 @@ class _EditFormState extends State<EditForm> {
       ),
       validator: (newValue) {
         if (newValue.isEmpty) {
-          return "can't empty";
+          return "please fill your preference";
         } else {
           return null;
         }
@@ -457,6 +437,7 @@ class _EditFormState extends State<EditForm> {
 
   TextFormField buildTransferFormField() {
     return TextFormField(
+      initialValue: "1",
       keyboardType: TextInputType.number,
       onSaved: (newValue) => travelCost = newValue as int,
       decoration: InputDecoration(
@@ -467,7 +448,7 @@ class _EditFormState extends State<EditForm> {
       ),
       validator: (newValue) {
         if (newValue.isEmpty) {
-          return "can't empty";
+          return "please fill your preference";
         } else {
           return null;
         }
@@ -482,17 +463,13 @@ class _EditFormState extends State<EditForm> {
         floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
       value: privateTransportation,
-      hint: Text(
-        'Select your preference',
-      ),
+      hint: Text('Electric scooter', style: TextStyle(color: Colors.black)),
       isExpanded: true,
       onChanged: (value) {
         setState(() {
           privateTransportation = value;
         });
       },
-      validator: (value) =>
-          value == null ? 'Please fill your preference' : null,
       items: privateTransporationList.map((String val) {
         return DropdownMenuItem(
           value: val,
@@ -506,6 +483,7 @@ class _EditFormState extends State<EditForm> {
 
   TextFormField buildWaitingTimeFormField() {
     return TextFormField(
+      initialValue: "30",
       keyboardType: TextInputType.number,
       onSaved: (newValue) => waitingTime = newValue as int,
       decoration: InputDecoration(
@@ -516,7 +494,7 @@ class _EditFormState extends State<EditForm> {
       ),
       validator: (newValue) {
         if (newValue.isEmpty) {
-          return "can't empty";
+          return "please fill your preference";
         } else {
           return null;
         }
@@ -531,17 +509,13 @@ class _EditFormState extends State<EditForm> {
         floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
       value: favoritePlace,
-      hint: Text(
-        'Do you prefer?',
-      ),
+      hint: Text('Yes', style: TextStyle(color: Colors.black)),
       isExpanded: true,
       onChanged: (value) {
         setState(() {
           favoritePlace = value;
         });
       },
-      validator: (value) =>
-          value == null ? 'Please fill your preference' : null,
       items: favoritePlaceList.map((String val) {
         return DropdownMenuItem(
           value: val,
@@ -560,17 +534,13 @@ class _EditFormState extends State<EditForm> {
         floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
       value: livingStreet,
-      hint: Text(
-        'Do you prefer?',
-      ),
+      hint: Text('No', style: TextStyle(color: Colors.black)),
       isExpanded: true,
       onChanged: (value) {
         setState(() {
           livingStreet = value;
         });
       },
-      validator: (value) =>
-          value == null ? 'Please fill your preference' : null,
       items: livingStreetList.map((String val) {
         return DropdownMenuItem(
           value: val,
@@ -589,17 +559,13 @@ class _EditFormState extends State<EditForm> {
         floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
       value: preferredTransportation,
-      hint: Text(
-        'Select your preference',
-      ),
+      hint: Text('Train', style: TextStyle(color: Colors.black)),
       isExpanded: true,
       onChanged: (value) {
         setState(() {
           preferredTransportation = value;
         });
       },
-      validator: (value) =>
-          value == null ? 'Please fill your preference' : null,
       items: preferredTransportationList.map((String val) {
         return DropdownMenuItem(
           value: val,
@@ -613,6 +579,7 @@ class _EditFormState extends State<EditForm> {
 
   TextFormField buildRoadInclinationFormField() {
     return TextFormField(
+      initialValue: "15",
       keyboardType: TextInputType.number,
       onSaved: (newValue) => roadInclination = newValue as int,
       decoration: InputDecoration(
@@ -623,7 +590,7 @@ class _EditFormState extends State<EditForm> {
       ),
       validator: (newValue) {
         if (newValue.isEmpty) {
-          return "can't empty";
+          return "please fill your preference";
         } else {
           return null;
         }
@@ -638,17 +605,13 @@ class _EditFormState extends State<EditForm> {
         floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
       value: roadSurface,
-      hint: Text(
-        'Select your preference',
-      ),
+      hint: Text('Asphalte', style: TextStyle(color: Colors.black)),
       isExpanded: true,
       onChanged: (value) {
         setState(() {
           roadSurface = value;
         });
       },
-      validator: (value) =>
-          value == null ? 'Please fill your preference' : null,
       items: roadSurfaceList.map((String val) {
         return DropdownMenuItem(
           value: val,
@@ -667,17 +630,13 @@ class _EditFormState extends State<EditForm> {
         floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
       value: sharingTransportation,
-      hint: Text(
-        'Select your preference',
-      ),
+      hint: Text('Nextbike', style: TextStyle(color: Colors.black)),
       isExpanded: true,
       onChanged: (value) {
         setState(() {
           sharingTransportation = value;
         });
       },
-      validator: (value) =>
-          value == null ? 'Please fill your preference' : null,
       items: sharingTransportationList.map((String val) {
         return DropdownMenuItem(
           value: val,
@@ -691,17 +650,18 @@ class _EditFormState extends State<EditForm> {
 
   TextFormField buildCapacityFormField() {
     return TextFormField(
+      initialValue: "50",
       keyboardType: TextInputType.number,
       onSaved: (newValue) => roadInclination = newValue as int,
       decoration: InputDecoration(
         labelText: "Capacity utilization of pulbic transportation",
-        hintText: "Min. rate of capacity utilization",
+        hintText: "Min. rate of capacity",
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixText: '%(percent)',
       ),
       validator: (newValue) {
         if (newValue.isEmpty) {
-          return "can't empty";
+          return "please fill your preference";
         } else {
           return null;
         }
@@ -716,17 +676,13 @@ class _EditFormState extends State<EditForm> {
         floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
       value: weather,
-      hint: Text(
-        'Select your preference',
-      ),
+      hint: Text('Sunny', style: TextStyle(color: Colors.black)),
       isExpanded: true,
       onChanged: (value) {
         setState(() {
           weather = value;
         });
       },
-      validator: (value) =>
-          value == null ? 'Please fill your preference' : null,
       items: weatherList.map((String val) {
         return DropdownMenuItem(
           value: val,
@@ -745,17 +701,13 @@ class _EditFormState extends State<EditForm> {
         floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
       value: currentLocation,
-      hint: Text(
-        'Do you prefer?',
-      ),
+      hint: Text('Yes', style: TextStyle(color: Colors.black)),
       isExpanded: true,
       onChanged: (value) {
         setState(() {
           currentLocation = value;
         });
       },
-      validator: (value) =>
-          value == null ? 'Please fill your preference' : null,
       items: currentLoactionList.map((String val) {
         return DropdownMenuItem(
           value: val,
@@ -774,17 +726,13 @@ class _EditFormState extends State<EditForm> {
         floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
       value: trafficCondtion,
-      hint: Text(
-        'Do you prefer?',
-      ),
+      hint: Text('No', style: TextStyle(color: Colors.black)),
       isExpanded: true,
       onChanged: (value) {
         setState(() {
           trafficCondtion = value;
         });
       },
-      validator: (value) =>
-          value == null ? 'Please fill your preference' : null,
       items: trafficCondtionList.map((String val) {
         return DropdownMenuItem(
           value: val,

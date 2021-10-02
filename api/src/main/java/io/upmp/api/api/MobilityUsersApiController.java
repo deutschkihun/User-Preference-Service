@@ -18,6 +18,7 @@ public class MobilityUsersApiController {
 
     @PostMapping("/api/mobilityUsers")
     public CreateMobilityUsersResponse saveMobilityUsers(@RequestBody @Valid MobilityUsers mobilityUsers) {
+        System.out.println("fwefewfwfwe "+ mobilityUsers);
         Long id = mobilityUsersService.join(mobilityUsers);
         return new CreateMobilityUsersResponse(id);
     }

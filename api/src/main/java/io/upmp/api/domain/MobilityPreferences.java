@@ -12,12 +12,11 @@ import javax.persistence.*;
 public class MobilityPreferences {
 
     @Id @GeneratedValue
-    //@Column(name = "mobility_preference_id")
+    @Column(name = "mobility_preference_id")
     private Long id;
 
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "mobility_user_id")
+    @OneToOne(mappedBy = "mobilityPreferences", fetch = FetchType.LAZY)
     private MobilityUsers mobilityUsers;
 
     // dynamic preference profile

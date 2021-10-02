@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:upp/components/custom_surfix_icon.dart';
 import 'package:upp/components/default_button.dart';
 import 'package:upp/components/form_error.dart';
@@ -6,6 +8,7 @@ import 'package:upp/constants.dart';
 import 'package:upp/helper/keyboard.dart';
 import 'package:upp/screen/menu/menu_screen.dart';
 import 'package:upp/size_config.dart';
+import 'package:http/http.dart' as http;
 
 class SignForm extends StatefulWidget {
   @override
@@ -16,6 +19,8 @@ class _SignFormState extends State<SignForm> {
   final _formKey = GlobalKey<FormState>();
   String email;
   String password;
+  bool isLoading = false;
+  String url = "http://localhost:8080/api/login/";
   final List<String> errors = [];
 
   void addError({String error}) {
@@ -30,6 +35,27 @@ class _SignFormState extends State<SignForm> {
       setState(() {
         errors.remove(error);
       });
+  }
+
+  Future signIn() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    await http.post(Uri.parse(url),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: json.encode({
+          'email': email,
+          'password': password,
+        }));
+
+    /*if (response.statusCode == 200) {
+      var jsonData = json.decode(response.body);
+      setState(() {
+        sharedPreferences.setString("token", jsonData['token']);
+      });
+    } else {
+      print(response.body);
+    }*/
   }
 
   @override
@@ -47,8 +73,7 @@ class _SignFormState extends State<SignForm> {
           text: "Continue",
           press: () {
             if (_formKey.currentState.validate()) {
-              _formKey.currentState.save();
-              // if all are valid then go to success screen
+              signIn();
               KeyboardUtil.hideKeyboard(context);
               Navigator.pushNamed(context, MenuScreen.routeName);
             }
@@ -61,13 +86,14 @@ class _SignFormState extends State<SignForm> {
   TextFormField buildPasswordFormField() {
     return TextFormField(
       obscureText: true,
-      onSaved: (newValue) => password = newValue,
+      controller: TextEditingController(text: password),
       onChanged: (value) {
         if (value.isNotEmpty) {
           removeError(error: kPassNullError);
         } else if (value.length >= 8) {
           removeError(error: kShortPassError);
         }
+        password = value;
         return null;
       },
       validator: (value) {
@@ -92,13 +118,15 @@ class _SignFormState extends State<SignForm> {
   TextFormField buildEmailFormField() {
     return TextFormField(
       keyboardType: TextInputType.emailAddress,
-      onSaved: (newValue) => email = newValue,
+      controller: TextEditingController(text: email),
       onChanged: (value) {
         if (value.isNotEmpty) {
           removeError(error: kEmailNullError);
         } else if (emailValidatorRegExp.hasMatch(value)) {
           removeError(error: kInvalidEmailError);
         }
+        email = value;
+
         return null;
       },
       validator: (value) {
