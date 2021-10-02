@@ -21,9 +21,13 @@ This project works based on flutter from Dart (clientside application), Spring b
 
 ## How to use this project
 
-1.Download flutter file in the local machine 
+1.Download flutter file in the local machine [download](https://flutter.dev/docs/get-started/install)
+2.Add the flutter tool to your path in bashrc or zshrc file (mac) 
 
-https://flutter.dev/docs/get-started/install
+```bash 
+$ export PATH="$PATH:`pwd`/flutter/bin"
+```
+
 
 ```bash
 git clone https://github.com/google/material-design-lite.git
