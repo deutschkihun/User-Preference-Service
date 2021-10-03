@@ -18,7 +18,13 @@ https://user-images.githubusercontent.com/45092135/135749464-9b45afe4-7ef6-43d3-
 
 ## Technical detail 
 
-This project works based on flutter from Dart (clientside application), Spring boot from Java (serverside application) and H2 Database.
+* folder name "client": client-side application -> Flutter from Dart 
+
+* folder name "api": server-side application -> Spring boot from Java
+
+* folder name h2: database of user preference service -> h2 Database version 1.4.199 [download](http://www.h2database.com/html/download.html)
+
+
 
 ## How to use this project
 
