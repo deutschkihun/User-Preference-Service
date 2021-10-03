@@ -9,8 +9,8 @@ This social background motivates this project to provide a personalized mobility
 
 ## Goal
 
-*Designing a generic preference model
-*Integration with the user preferenced service
+* Designing a generic preference model
+* Integration with the user preferenced service
 
 ## Prototype 
 
