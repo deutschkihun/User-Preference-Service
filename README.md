@@ -38,7 +38,7 @@ $ export PATH="$PATH:`pwd`/flutter/bin"
 
 ![application.yml](https://user-images.githubusercontent.com/45092135/135749936-87e3b048-36aa-4a65-9a11-13b3db14c5ff.png)
 
-
+In this file you can create a username and password for the h2 database authentication. 
 
 5.Run database (H2 Database) 
 
@@ -49,13 +49,13 @@ $ cd bin
 $ ./h2.sh
 ```
 
-Then h2 database will going to work on. For the access of database you need to set username and password (optional) based on the Spring boot setup 
+4. Run flutter file in client folder
 
-### Download / Clone
+```bash 
+$ source ~/.bashrc 
+$ cd (your root folder name)
+$ cd client
+$ flutter run 
 
-Clone the repo using Git:
 
-```bash
-git clone https://github.com/google/material-design-lite.git
-```
 
