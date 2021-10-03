@@ -58,4 +58,11 @@ $ cd client
 $ flutter run 
 
 
+if you want to check your flutter environment then, 
+
+```bash
+$ flutter doctor
+```
+
+
 
