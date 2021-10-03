@@ -13,9 +13,7 @@ Designing a generic preference model,Integration with the user preferenced servi
 
 ## Prototype 
 
-https://user-images.githubusercontent.com/45092135/135749439-db4ec491-9fae-4ae3-b9e3-8ed343036fce.mov
-
-
+https://user-images.githubusercontent.com/45092135/135749464-9b45afe4-7ef6-43d3-a548-a9075ffc0f97.mov
 
 
 ## Technical detail 
