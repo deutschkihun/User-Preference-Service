@@ -56,7 +56,7 @@ $ source ~/.bashrc
 $ cd (your root folder name)
 $ cd client
 $ flutter run 
-
+```
 
 if you want to check your flutter environment then, 
 
