@@ -34,8 +34,13 @@ https://user-images.githubusercontent.com/45092135/135749464-9b45afe4-7ef6-43d3-
 ```bash 
 $ export PATH="$PATH:`pwd`/flutter/bin"
 ```
+3. Set application.yml file in api folder 
 
-3.Run database (H2 Database) 
+![application.yml](https://user-images.githubusercontent.com/45092135/135749936-87e3b048-36aa-4a65-9a11-13b3db14c5ff.png)
+
+
+
+5.Run database (H2 Database) 
 
 ```bash 
 $ cd api 
